@@ -10,26 +10,6 @@ import {
 
 import Bridge from './utils';
 
-function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // Remember the latest function.
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  // Set up the interval.
-  useEffect(() => {
-    function tick() {
-      savedCallback.current();
-    }
-    if (delay !== null) {
-      const id = setInterval(tick, delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
-
 const App = () => {
   const [count, setState] = useState(0);
   const [count2, setState2] = useState(0);
@@ -44,22 +24,7 @@ const App = () => {
       setState(status);
     });
   }, [count]);
-  /*
-  const time = () => {
-    setState(count + 1);
-    Bridge.statusChange(({status}) => {
-      console.log({status});
-      setState2(status);
-    });
 
-    const rest = count % 3;
-    if (rest === 2) {
-      Bridge.show(rest, count2, 2);
-    }
-  };
-
-  useInterval(() => time(), 1000);
- */
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Contador </Text>
