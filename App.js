@@ -34,6 +34,17 @@ const App = () => {
   const [count, setState] = useState(0);
   const [count2, setState2] = useState(0);
 
+  useEffect(() => {
+    Bridge.start();
+  }, []);
+
+  useEffect(() => {
+    Bridge.statusChange(({status}) => {
+      console.log({status});
+      setState(status);
+    });
+  }, [count]);
+  /*
   const time = () => {
     setState(count + 1);
     Bridge.statusChange(({status}) => {
@@ -48,12 +59,12 @@ const App = () => {
   };
 
   useInterval(() => time(), 1000);
-
+ */
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Contador </Text>
       <View style={styles.count_container}>
-        <Text style={styles.count}>{count2}</Text>
+        <Text style={styles.count}>{count}</Text>
       </View>
     </View>
   );

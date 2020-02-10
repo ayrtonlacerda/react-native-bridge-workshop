@@ -5,6 +5,7 @@ const testBridgeEmmiter = new NativeEventEmitter(TestBridge);
 
 const Bridge = {
   show: (rest, count, interval) => TestBridge.show(rest, count, interval),
+  start: () => TestBridge.startCount(),
   statusChange: callback =>
     testBridgeEmmiter.addListener('StatusChanged', callback),
 };
