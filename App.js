@@ -8,6 +8,8 @@ import {
   StatusBar,
 } from 'react-native';
 
+import Bridge from './utils';
+
 function useInterval(callback, delay) {
   const savedCallback = useRef();
 
@@ -30,14 +32,28 @@ function useInterval(callback, delay) {
 
 const App = () => {
   const [count, setState] = useState(0);
+  const [count2, setState2] = useState(0);
 
-  useInterval(() => setState(count + 1), 1000);
+  const time = () => {
+    setState(count + 1);
+    Bridge.statusChange(({status}) => {
+      console.log({status});
+      setState2(status);
+    });
+
+    const rest = count % 3;
+    if (rest === 2) {
+      Bridge.show(rest, count2, 2);
+    }
+  };
+
+  useInterval(() => time(), 1000);
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Contador </Text>
       <View style={styles.count_container}>
-        <Text style={styles.count}>{count}</Text>
+        <Text style={styles.count}>{count2}</Text>
       </View>
     </View>
   );
