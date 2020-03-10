@@ -11,7 +11,7 @@ import {
 } from './styles';
 
 const CountComponent = ({}) => {
-  const {count, addCount, subCount} = useStoreCount();
+  const {count, increase, reset} = useStoreCount();
 
   return (
     <Container>
@@ -20,10 +20,10 @@ const CountComponent = ({}) => {
         <Count>{count}</Count>
       </ContainerCount>
       <ContainerButtons>
-        <Buttons red onPress={() => subCount()}>
+        <Buttons red onPress={() => reset()}>
           <Title>-</Title>
         </Buttons>
-        <Buttons onPress={() => addCount()}>
+        <Buttons onPress={() => increase()}>
           <Title>+</Title>
         </Buttons>
       </ContainerButtons>
