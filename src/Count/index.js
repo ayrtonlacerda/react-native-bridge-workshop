@@ -1,9 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-
-// redux
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Actions} from '../store/actions';
+import {useStoreCount} from '../store';
 
 import {
   Container,
@@ -14,7 +10,9 @@ import {
   Buttons,
 } from './styles';
 
-const CountComponent = ({count, addCount, subCount}) => {
+const CountComponent = ({}) => {
+  const {count, addCount, subCount} = useStoreCount();
+
   return (
     <Container>
       <Title>Contador </Title>
@@ -33,21 +31,4 @@ const CountComponent = ({count, addCount, subCount}) => {
   );
 };
 
-const mapStateToProps = state => ({
-  ...state.reducer,
-});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      ...Actions,
-    },
-    dispatch,
-  );
-
-const Connected = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CountComponent);
-
-export {Connected as CountComponent};
+export {CountComponent};
