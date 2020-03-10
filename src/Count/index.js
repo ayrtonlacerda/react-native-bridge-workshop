@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react';
-import {useStoreCount} from '../store';
+import React, {useContext} from 'react';
+import {StoreContext} from '../store';
 
 import {
   Container,
@@ -11,8 +11,8 @@ import {
 } from './styles';
 
 const CountComponent = ({}) => {
-  const {count, addCount, subCount} = useStoreCount();
-
+  const [count, setCount] = useContext(StoreContext);
+  console.log(setCount);
   return (
     <Container>
       <Title>Contador </Title>
@@ -20,10 +20,10 @@ const CountComponent = ({}) => {
         <Count>{count}</Count>
       </ContainerCount>
       <ContainerButtons>
-        <Buttons red onPress={() => subCount()}>
+        <Buttons red onPress={() => setCount(count - 1)}>
           <Title>-</Title>
         </Buttons>
-        <Buttons onPress={() => addCount()}>
+        <Buttons onPress={() => setCount(count + 1)}>
           <Title>+</Title>
         </Buttons>
       </ContainerButtons>

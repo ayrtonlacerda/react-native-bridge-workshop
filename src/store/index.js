@@ -1,9 +1,16 @@
-import create from 'zustand';
+import React, {useState} from 'react';
 
-const [useStoreCount] = create(set => ({
-  count: 0,
-  addCount: () => set(state => ({count: state.count + 1})),
-  subCount: () => set(state => ({count: state.count - 1})),
-}));
+export const StoreContext = React.createContext([{}, () => {}]);
 
-export {useStoreCount};
+export const StoreProvider = props => {
+  const [count, setCount] = useState(0);
+
+  const addCount = () => setCount(count + 1);
+  const subCount = () => setCount(count - 1);
+
+  return (
+    <StoreContext.Provider value={[count, setCount]}>
+      {props.children}
+    </StoreContext.Provider>
+  );
+};
