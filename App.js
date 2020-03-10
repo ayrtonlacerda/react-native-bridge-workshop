@@ -1,35 +1,12 @@
 import React, {useState, useEffect, useRef} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
-
-import Bridge from './utils';
+import {StyleSheet, View, Text} from 'react-native';
 
 const App = () => {
-  const [count, setState] = useState(0);
-  const [count2, setState2] = useState(0);
-
-  useEffect(() => {
-    Bridge.start();
-  }, []);
-
-  useEffect(() => {
-    Bridge.statusChange(({status}) => {
-      console.log({status});
-      setState(status);
-    });
-  }, [count]);
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Contador </Text>
       <View style={styles.count_container}>
-        <Text style={styles.count}>{count}</Text>
+        <Text style={styles.count}>haaa</Text>
       </View>
     </View>
   );
