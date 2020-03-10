@@ -7,8 +7,8 @@
  onde a contagem e feita com uma thread nativa android para que funcione enquanto 
  a app esta em background.
 
- Para comparar as vantagens use o useMemory em vez da bridge e repare que ao minimizar o app 
- o contador para.
+ Para comparar as vantagens descomente o useMemory e comente todos os useEffects
+ e perceba que o contador so conta quando o app esta aberto na tela.
 
 
 ### 2. State Management
