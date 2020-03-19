@@ -1,8 +1,7 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React from 'react';
 
 // redux
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {Actions} from '../store/actions';
 
 import {
@@ -14,7 +13,10 @@ import {
   Buttons,
 } from './styles';
 
-const CountComponent = ({count, addCount, subCount}) => {
+const CountComponent = ({addCount}) => {
+  const {count} = useSelector(state => state.reducer);
+  const dispatche = useDispatch();
+
   return (
     <Container>
       <Title>Contador </Title>
@@ -22,10 +24,10 @@ const CountComponent = ({count, addCount, subCount}) => {
         <Count>{count}</Count>
       </ContainerCount>
       <ContainerButtons>
-        <Buttons red onPress={() => subCount()}>
+        <Buttons red onPress={() => dispatche(Actions.subCount())}>
           <Title>-</Title>
         </Buttons>
-        <Buttons onPress={() => addCount()}>
+        <Buttons onPress={() => dispatche(Actions.addCount())}>
           <Title>+</Title>
         </Buttons>
       </ContainerButtons>
@@ -33,21 +35,4 @@ const CountComponent = ({count, addCount, subCount}) => {
   );
 };
 
-const mapStateToProps = state => ({
-  ...state.reducer,
-});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      ...Actions,
-    },
-    dispatch,
-  );
-
-const Connected = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(CountComponent);
-
-export {Connected as CountComponent};
+export {CountComponent};
